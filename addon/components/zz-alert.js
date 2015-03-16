@@ -26,7 +26,15 @@ export default Ember.Component.extend( {
   //
   // @property {Ember.Array} classNameBindings
   //
-  classNameBindings: ['themeClassName', 'dismissable:alert-dismissable'],
+  classNameBindings: ['kindClass', 'dismissable:alert-dismissable', 'extraClasses'],
+
+  // Extra css classes 
+  //
+  // @property {Ember.String}
+  // @default  null
+  // @public
+  //
+  extraClasses: null,
 
 
   // The ARIA role attribute for the alert's div
@@ -36,15 +44,11 @@ export default Ember.Component.extend( {
   //
   ariaRole: 'alert',
 
-  // -------------------------------------------------------------------------
-  // Actions
-
   // Actions for the alert component
   //
   // @property {Ember.Object} actions
   //
   actions: {
-
 
     // Trigger a bound "dismiss" action when the alert is dismissed
     //
@@ -56,11 +60,6 @@ export default Ember.Component.extend( {
     }
   },
 
-  // Events
-
-  // Properties
-
-
   // Whether to make the alert dismissable or not
   //
   // @property {boolean} dismissable
@@ -69,12 +68,12 @@ export default Ember.Component.extend( {
   dismissable: false,
 
 
-  // The Bootstrap "theme" style to apply to the alert
+  // The visual "kind" of alert
   //
-  // @property {Ember.String} theme
+  // @property {Ember.String} kind
   // @default  "info"
   //
-  theme: 'info',
+  kind: 'info',
 
   // Observers
 
@@ -90,14 +89,14 @@ export default Ember.Component.extend( {
     return this.get('label');
   }).property('label'),
 
-  // The generated Bootstrap "theme" style class for the alert
+  // Convert kind to alert kind class
   //
-  // @function themeClassName
-  // @observes theme
+  // @function kindClass
+  // @observes kind
   // @returns  {Ember.String}  Defaults to "alert-info"
   //
-  themeClassName: function() {
-    return 'alert-' + this.get( 'theme' );
-  }.property( 'theme' )
+  kindClass: function() {
+    return 'alert-' + this.get( 'kind' );
+  }.property( 'kind' )
 
 });
